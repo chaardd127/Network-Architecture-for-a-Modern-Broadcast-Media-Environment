@@ -25,7 +25,7 @@ Access Layer: End-device connectivity for users, systems, and production teams
 
 🎯 Key Features
 ```
--VLAN segmentation for departmental isolation (News, Digital, Tech, Production)
+-VLAN segmentation for departmental isolation (News, Digital, Tech, Production, etc.)
 -Inter-VLAN routing for controlled communication between services
 -HSRP for gateway redundancy and high availability
 -NAT implementation for controlled internet access
