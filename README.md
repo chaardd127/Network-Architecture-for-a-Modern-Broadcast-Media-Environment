@@ -17,6 +17,12 @@ Distribution Layer: Policy enforcement, inter-VLAN routing, redundancy (HSRP)
 
 Access Layer: End-device connectivity for users, systems, and production teams
 
+
+
+🗺️ Network Topology
+![Network Topology](./network%20diagram.png)
+*Figure: Hierarchical Three-Tier Design (Core, Distribution, and Access Layers)*
+
 🎯 Key Features
 ```
 -VLAN segmentation for departmental isolation (News, Digital, Tech, Production)
@@ -27,6 +33,24 @@ Access Layer: End-device connectivity for users, systems, and production teams
 -Structured IP addressing scheme
 -Enterprise-style topology design
 ```
+
+
+📊 IP Addressing Scheme
+The following table outlines the logical segmentation of the broadcast environment:
+
+
+| Department | VLAN ID | Subnet | Gateway (HSRP) |
+| :--- | :--- | :--- | :--- |
+| Newsroom | 10 | 172.16.31.0/27 | 172.16.31.1 |
+| Digital Media | 20 | 172.16.31.32/27 | 172.16.31.33 |
+| Tech/Engineering | 30 | 172.16.31.64/27 | 172.16.31.65 |
+| Production | 40 | 172.16.31.96/27 | 172.16.31.97 |
+| Admin | 50 | 172.16.31.128/27 | 172.16.31.129 |
+| Accounting | 60| 172.16.31.160/27 | 172.16.31.161 |
+| HR | 70 | 172.16.31.192/27 | 172.16.31.193 |
+| Marketing | 80 | 172.16.31.224/27 | 172.16.31.225 |
+
+
 📺 Logical Environment (Broadcast Simulation)
 
 The network simulates a media organization with the following departments:
