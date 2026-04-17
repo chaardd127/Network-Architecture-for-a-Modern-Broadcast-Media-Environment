@@ -1,0 +1,270 @@
+==DISTRIBUTION SWITCH 3 ==
+
+
+Building configuration...
+Compressed configuration from 7383 bytes to 3601 bytes[OK]
+[OK]
+DSW3#sh run
+Building configuration...
+
+Current configuration : 4516 bytes
+!
+version 16.3.2
+service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname DSW3
+!
+!
+enable secret 5 $1$mERr$lYw10XlIcocIBIyzRPuMs1
+!
+!
+!
+!
+!
+!
+no ip cef
+ip routing
+!
+no ipv6 cef
+!
+!
+!
+username BroadcastMediaLab secret 5 $1$mERr$g1aKftZJb14kmRhmNNLOi/
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip ssh version 2
+ip domain-name BroadcastDigitalMediaLab.com
+ip name-server 192.168.7.4
+!
+!
+spanning-tree mode rapid-pvst
+spanning-tree vlan 50,60,70 priority 24576
+spanning-tree vlan 80,99 priority 28672
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 11.11.11.11 255.255.255.255
+!
+interface GigabitEthernet1/0/1
+ no switchport
+ ip address 192.168.50.2 255.255.255.252
+ ip ospf network point-to-point
+ ip ospf priority 1
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet1/0/2
+ switchport trunk native vlan 1001
+ switchport trunk allowed vlan 50,60,70,80,99
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface GigabitEthernet1/0/3
+ switchport trunk native vlan 1001
+ switchport trunk allowed vlan 50,60,70,80,99
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface GigabitEthernet1/0/4
+ switchport trunk native vlan 1001
+ switchport trunk allowed vlan 50,60,70,80,99
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface GigabitEthernet1/0/5
+ switchport trunk native vlan 1001
+ switchport trunk allowed vlan 50,60,70,80,99
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface GigabitEthernet1/0/6
+ no switchport
+ ip address 192.168.60.2 255.255.255.252
+ ip ospf network point-to-point
+ ip ospf priority 1
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet1/0/7
+ shutdown
+!
+interface GigabitEthernet1/0/8
+ shutdown
+!
+interface GigabitEthernet1/0/9
+ shutdown
+!
+interface GigabitEthernet1/0/10
+ shutdown
+!
+interface GigabitEthernet1/0/11
+ shutdown
+!
+interface GigabitEthernet1/0/12
+ shutdown
+!
+interface GigabitEthernet1/0/13
+ shutdown
+!
+interface GigabitEthernet1/0/14
+ shutdown
+!
+interface GigabitEthernet1/0/15
+ shutdown
+!
+interface GigabitEthernet1/0/16
+ shutdown
+!
+interface GigabitEthernet1/0/17
+ shutdown
+!
+interface GigabitEthernet1/0/18
+ shutdown
+!
+interface GigabitEthernet1/0/19
+ shutdown
+!
+interface GigabitEthernet1/0/20
+ shutdown
+!
+interface GigabitEthernet1/0/21
+ shutdown
+!
+interface GigabitEthernet1/0/22
+ shutdown
+!
+interface GigabitEthernet1/0/23
+ shutdown
+!
+interface GigabitEthernet1/0/24
+ shutdown
+!
+interface GigabitEthernet1/1/1
+ shutdown
+!
+interface GigabitEthernet1/1/2
+ shutdown
+!
+interface GigabitEthernet1/1/3
+ shutdown
+!
+interface GigabitEthernet1/1/4
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan10
+ mac-address 00d0.baab.d201
+ no ip address
+ standby version 2
+!
+interface Vlan50
+ mac-address 00d0.baab.d202
+ ip address 172.16.31.130 255.255.255.224
+ ip helper-address 1.1.1.1
+ standby version 2
+ standby 5 ip 172.16.31.129
+ standby 5 priority 105
+ standby 5 preempt
+!
+interface Vlan60
+ mac-address 00d0.baab.d203
+ ip address 172.16.31.162 255.255.255.224
+ ip helper-address 1.1.1.1
+ standby version 2
+ standby 6 ip 172.16.31.161
+ standby 6 priority 105
+ standby 6 preempt
+!
+interface Vlan70
+ mac-address 00d0.baab.d204
+ ip address 172.16.31.194 255.255.255.224
+ ip helper-address 1.1.1.1
+ standby version 2
+ standby 7 ip 172.16.31.193
+ standby 7 priority 105
+ standby 7 preempt
+!
+interface Vlan80
+ mac-address 00d0.baab.d205
+ ip address 172.16.31.226 255.255.255.224
+ ip helper-address 1.1.1.1
+ standby version 2
+ standby 8 ip 172.16.31.225
+ standby 8 priority 105
+ standby 8 preempt
+!
+interface Vlan99
+ mac-address 00d0.baab.d206
+ ip address 10.99.0.29 255.255.255.240
+ ip helper-address 1.1.1.1
+ standby version 2
+ standby 9 ip 10.99.0.30
+ standby 9 priority 105
+ standby 9 preempt
+!
+router ospf 100
+ router-id 11.11.11.11
+ log-adjacency-changes
+ passive-interface Loopback0
+ passive-interface Vlan50
+ passive-interface Vlan60
+ passive-interface Vlan70
+ passive-interface Vlan80
+ passive-interface Vlan99
+ network 192.168.50.2 0.0.0.0 area 0
+ network 192.168.60.2 0.0.0.0 area 0
+ network 172.16.31.130 0.0.0.0 area 0
+ network 172.16.31.162 0.0.0.0 area 0
+ network 172.16.31.194 0.0.0.0 area 0
+ network 172.16.31.226 0.0.0.0 area 0
+ network 10.99.0.29 0.0.0.0 area 0
+ network 11.11.11.11 0.0.0.0 area 0
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+ip access-list standard VLAN30_SSH
+ permit 172.16.31.64 0.0.0.31
+ deny any
+!
+!
+!
+!
+!
+logging trap debugging
+logging 192.168.7.4
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ access-class VLAN30_SSH in
+ exec-timeout 5 0
+ login local
+ transport input ssh
+!
+!
+!
+ntp server 192.168.2.1
+ntp update-calendar
+!
+end

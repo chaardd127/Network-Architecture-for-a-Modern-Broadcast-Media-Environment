@@ -1,0 +1,215 @@
+== ROUTER 1 ==
+
+
+Building configuration...
+
+Current configuration : 4902 bytes
+!
+version 15.1
+service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname R1
+!
+!
+!
+enable secret 5 $1$mERr$lYw10XlIcocIBIyzRPuMs1
+!
+!
+ip dhcp excluded-address 10.99.0.1 10.99.0.8
+ip dhcp excluded-address 10.99.0.12 10.99.0.14
+ip dhcp excluded-address 10.99.0.17 10.99.0.24
+ip dhcp excluded-address 10.99.0.28 10.99.0.30
+ip dhcp excluded-address 172.16.31.1 172.16.31.5
+ip dhcp excluded-address 172.16.31.33 172.16.31.37
+ip dhcp excluded-address 172.16.31.65 172.16.31.69
+ip dhcp excluded-address 172.16.31.97 172.16.31.101
+ip dhcp excluded-address 172.16.31.129 172.16.31.133
+ip dhcp excluded-address 172.16.31.161 172.16.31.165
+ip dhcp excluded-address 172.16.31.193 172.16.31.197
+ip dhcp excluded-address 172.16.31.225 172.16.31.229
+!
+ip dhcp pool VLAN10_NEWS_STAFF
+ network 172.16.31.0 255.255.255.224
+ default-router 172.16.31.1
+ dns-server 192.168.7.4
+ domain-name BroadcastDigitalMediaLab.com
+ip dhcp pool VLAN20_DIGITAL_TEAM
+ network 172.16.31.32 255.255.255.224
+ default-router 172.16.31.33
+ dns-server 192.168.7.4
+ domain-name BroadcastDigitalMediaLab.com
+ip dhcp pool VLAN30_TECH
+ network 172.16.31.64 255.255.255.224
+ default-router 172.16.31.65
+ dns-server 192.168.7.4
+ domain-name BroadcastDigitalMediaLab.com
+ip dhcp pool VLAN40_PRODUCTION_TEAM
+ network 172.16.31.96 255.255.255.224
+ default-router 172.16.31.97
+ dns-server 192.168.7.4
+ domain-name BroadcastDigitalMediaLab.com
+ip dhcp pool VLAN50_ADMIN
+ network 172.16.31.128 255.255.255.224
+ default-router 172.16.31.129
+ dns-server 192.168.7.4
+ domain-name BroadcastDigitalMediaLab.com
+ip dhcp pool VLAN60_ACCOUNTING
+ network 172.16.31.160 255.255.255.224
+ default-router 172.16.31.161
+ dns-server 192.168.7.4
+ domain-name BroadcastDigitalMediaLab.com
+ip dhcp pool VLAN70_HR
+ network 172.16.31.192 255.255.255.224
+ default-router 172.16.31.193
+ dns-server 192.168.7.4
+ domain-name BroadcastDigitalMediaLab.com
+ip dhcp pool VLAN80_MARKETING
+ network 172.16.31.224 255.255.255.224
+ default-router 172.16.31.225
+ dns-server 192.168.7.4
+ domain-name BroadcastDigitalMediaLab.com
+ip dhcp pool VLAN99_MANAGEMENT_1
+ network 10.99.0.0 255.255.255.240
+ default-router 10.99.0.14
+ dns-server 192.168.7.4
+ domain-name BroadcastDigitalMediaLab.com
+ip dhcp pool VLAN99_MANAGEMENT_2
+ network 10.99.0.16 255.255.255.240
+ default-router 10.99.0.30
+ dns-server 192.168.7.4
+ domain-name BroadcastDigitalMediaLab.com
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+username BroadcastMediaLab secret 5 $1$mERr$g1aKftZJb14kmRhmNNLOi/
+!
+!
+license udi pid CISCO2911/K9 sn FTX15241YB7-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip ssh version 2
+ip domain-name BroadcastDigitalMediaLab.com
+ip name-server 192.168.7.4
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 1.1.1.1 255.255.255.255
+!
+interface GigabitEthernet0/0
+ ip address 203.0.113.1 255.255.255.252
+ ip nat outside
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 192.168.7.1 255.255.255.248
+ ip access-group FILE_SHARING out
+ ip nat inside
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface GigabitEthernet0/0/0
+ ip address 192.168.2.1 255.255.255.252
+ ip ospf network point-to-point
+ ip ospf priority 1
+ ip ospf 100 area 0
+ ip nat inside
+!
+interface GigabitEthernet0/1/0
+ ip address 192.168.1.1 255.255.255.252
+ ip ospf network point-to-point
+ ip ospf priority 1
+ ip ospf 100 area 0
+ ip nat inside
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 100
+ router-id 1.1.1.1
+ log-adjacency-changes
+ passive-interface GigabitEthernet0/0
+ passive-interface GigabitEthernet0/1
+ passive-interface Loopback0
+ network 1.1.1.1 0.0.0.0 area 0
+ default-information originate
+!
+ip nat inside source list 2 interface GigabitEthernet0/0 overload
+ip classless
+ip route 0.0.0.0 0.0.0.0 203.0.113.2 
+!
+ip flow-export version 9
+!
+!
+access-list 2 permit 172.16.31.0 0.0.0.31
+access-list 2 permit 172.16.31.32 0.0.0.31
+access-list 2 permit 172.16.31.64 0.0.0.31
+access-list 2 permit 172.16.31.96 0.0.0.31
+access-list 2 permit 172.16.31.128 0.0.0.31
+access-list 2 permit 172.16.31.160 0.0.0.31
+access-list 2 permit 172.16.31.192 0.0.0.31
+access-list 2 permit 172.16.31.224 0.0.0.31
+access-list 2 permit 10.99.0.0 0.0.0.15
+access-list 2 permit 10.99.0.16 0.0.0.15
+access-list 2 permit 192.168.7.0 0.0.0.7
+ip access-list standard VLAN30_SSH
+ permit 172.16.31.64 0.0.0.31
+ deny any
+ip access-list extended FILE_SHARING
+ permit tcp 172.16.31.64 0.0.0.31 host 192.168.7.4 eq 22
+ permit tcp 172.16.31.64 0.0.0.31 host 192.168.7.4 eq telnet
+ deny tcp any host 192.168.7.4 eq 22
+ deny tcp any host 192.168.7.4 eq telnet
+ permit tcp any host 192.168.7.4 eq 20
+ permit tcp any host 192.168.7.4 eq ftp
+ permit ip any any
+!
+!
+!
+!
+!
+logging trap debugging
+logging 192.168.7.4
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ access-class VLAN30_SSH in
+ exec-timeout 5 0
+ login local
+ transport input ssh
+!
+!
+ntp server 203.0.113.2
+ntp update-calendar
+!
+end
