@@ -20,6 +20,7 @@ Access Layer: End-device connectivity for users, systems, and production teams
 
 
 🗺️ Network Topology
+
 ![Network Topology](./network%20diagram.png)
 *Figure: Hierarchical Three-Tier Design (Core, Distribution, and Access Layers)*
 
@@ -61,7 +62,6 @@ Digital Media & Online Platforms
 Technical Engineering Team
 On-Air & Production Team
 Administrative & Support Services
-
 ```
 For full verification, see the [verification images folder](./verification%20images).
 
