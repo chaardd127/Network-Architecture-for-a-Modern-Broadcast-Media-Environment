@@ -50,6 +50,7 @@ The following table outlines the logical segmentation of the broadcast environme
 | HR | 70 | 172.16.31.192/27 | 172.16.31.193 |
 | Marketing | 80 | 172.16.31.224/27 | 172.16.31.225 |
 
+> *For the full addressing plan, see [IPv4 addressing lists and table.xlsx](./IPv4%20addressing%20lists%20and%20table.xlsx)*
 
 📺 Logical Environment (Broadcast Simulation)
 
@@ -60,7 +61,10 @@ Digital Media & Online Platforms
 Technical Engineering Team
 On-Air & Production Team
 Administrative & Support Services
+
 ```
+For full verification, see the [verification images folder](./verification%20images).
+
 🔐 Design Objectives
 ```
 Security through segmentation (VLAN isolation)
@@ -81,3 +85,5 @@ Port Security
 SSH and ACL
 NTP and DNS
 ```
+## ⌨️ Configuration Files
+All device configurations (Running-Configs) can be found in the [show running file folder](./show%20running%20file).
