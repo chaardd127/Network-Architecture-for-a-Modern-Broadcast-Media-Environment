@@ -12,7 +12,9 @@ This project demonstrates the design and implementation of a scalable three-tier
 The network follows a hierarchical three-tier design:
 
 Core Layer: High-speed backbone routing between distribution blocks
+
 Distribution Layer: Policy enforcement, inter-VLAN routing, redundancy (HSRP)
+
 Access Layer: End-device connectivity for users, systems, and production teams
 
 🎯 Key Features
