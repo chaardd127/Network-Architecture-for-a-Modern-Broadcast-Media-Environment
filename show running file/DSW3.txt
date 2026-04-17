@@ -169,11 +169,6 @@ interface Vlan1
  no ip address
  shutdown
 !
-interface Vlan10
- mac-address 00d0.baab.d201
- no ip address
- standby version 2
-!
 interface Vlan50
  mac-address 00d0.baab.d202
  ip address 172.16.31.130 255.255.255.224
